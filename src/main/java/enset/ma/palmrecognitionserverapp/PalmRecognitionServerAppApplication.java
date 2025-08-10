@@ -1,8 +1,8 @@
 package enset.ma.palmrecognitionserverapp;
 
-import enset.ma.palmrecognitionserverapp.entities.Person;
+import enset.ma.palmrecognitionserverapp.entities.TimePeriod;
 import enset.ma.palmrecognitionserverapp.enums.UserType;
-import enset.ma.palmrecognitionserverapp.repositories.UserRepository;
+import enset.ma.palmrecognitionserverapp.repositories.TimePeriodRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,15 +17,14 @@ public class PalmRecognitionServerAppApplication {
         SpringApplication.run(PalmRecognitionServerAppApplication.class, args);
     }
 
- @Bean
-    CommandLineRunner commandLineRunner(UserRepository userRepository)
+    @Bean
+    CommandLineRunner commandLineRunner(TimePeriodRepository repository)
     {
         return args -> {
-            Stream.of("Mohammed","Benoit","Rebani","marius").forEach(name -> {
-                Person person =new Person();
-                person.setName(name);
-                person.setType(UserType.VISITOR);
-                userRepository.save(person);
+            Stream.of("conge","cours2","cours3").forEach(name -> {
+                TimePeriod timePeriod = new TimePeriod();
+                timePeriod.setTimePeriodName(name);
+                repository.save(timePeriod);
             });
         };
     }
